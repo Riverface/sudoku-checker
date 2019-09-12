@@ -8,7 +8,7 @@ describe("Sukodu", function () {
         "534678912 672195348 198342567 859761423 426853791 713924856 961537284 287411635 345286179"
     ];
 
-    var gboard = new GameBoard(sampleboards[0]);
+    var gboard = new GameBoard(sampleboards[1]);
 
 
     gboard.Init();

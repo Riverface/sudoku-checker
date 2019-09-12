@@ -3,7 +3,7 @@ export function GameBoard(rs) {
     this.totalrows = 9;
     this.rs = rs;
     this.checkarray = [];
-
+    this.workingarray=[];
 }
 GameBoard.prototype.Init = function () {
     this.Assemble();
@@ -33,7 +33,6 @@ GameBoard.prototype.Assemble = function () {
 GameBoard.prototype.Print = function () {
     var currboard = this;
     currboard.printer = "";
-    currboard.printer += "";
     currboard.rows.forEach(function (i) {
         currboard.printer += "<div class='cell'>";
         i.forEach(function (i2, e) {
@@ -47,7 +46,6 @@ GameBoard.prototype.Print = function () {
         currboard.printer += "</div></div>";
     });
     currboard.printer += "";
-    currboard.printer += "";
     return currboard.printer;
 }
 GameBoard.prototype.AddButtons = function () {
@@ -59,15 +57,15 @@ GameBoard.prototype.CellCheck = function () {
     for (var i = 0; i <= 6; i += 3) {
 
         for (var j = 0; j <= 6; j += 3) {
-            gb.checkarray = [];
+            gb.workingarray = [];
             for (var x = i; x < i + 3; x++) {
                 for (var y = j; y < j + 3; y++) {
-                    gb.checkarray.push(gb.rows[x][y]);
-                    console.log(gb.checkarray);
+                    gb.workingarray.push(gb.rows[y][y]);
+
                 }
             }
         }   
-        result = gb.Checker(gb.checkarray);
+        result = gb.Checker(gb.workingarray);
 
 
     }
@@ -80,12 +78,12 @@ GameBoard.prototype.Checkrow = function () {
     var result= [];
     for (var cR = 0; cR < 9; cR++){
 
-        gb.checkarray = [];
+        gb.workingarray = [];
         for (var cS = 0; cS < 9; cS++) {
-            gb.checkarray.push(gb.rows[cR][cS]);
+            gb.workingarray.push(gb.rows[cR][cS]);
         }
     }
-    result = gb.Checker(gb.checkarray);
+    result = gb.Checker(gb.workingarray);
     return result;
 }
 
@@ -95,12 +93,12 @@ GameBoard.prototype.CheckCol = function () {
     for (var cR = 0; cR < 9; cR++)
     {
 
-        gb.checkarray = [];
+        gb.workingarray = [];
         for (var cS = 0; cS < 9; cS++) {
             
-            gb.checkarray.push(gb.rows[cS][cR]);
+            gb.workingarray.push(gb.rows[cS][cR]);
         }
-        result = gb.Checker(gb.checkarray);
+        result = gb.Checker(gb.workingarray);
         }
     return result;
 }
@@ -146,14 +144,15 @@ GameBoard.prototype.Checker = function (numbers) {
                     gb.checkarray[9]++;
                     break;
             }
-            gb.checkarray.forEach(function (check) {
-
-                if (checks[1]) {
-                    if (check > 1) {
-                        checks[0] = false;
+        });
+                gb.checkarray.forEach(function (check) {
+    
+                    if (checks[1]) {
+                        if (check > 1) {
+                         console.log(check);
+                            checks[0] = false;
+                        }
                     }
-                }
-            });
 
         });
     }
